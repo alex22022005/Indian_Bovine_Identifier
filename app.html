@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buffalo & Cattle Breed Recognition - App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="navbar-visible">
+    <!-- ================== Navigation Bar ================== -->
+    <nav id="navbar" class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand" id="nav-brand">Breed Recognition System</div>
+        <div class="nav-menu">
+          <button id="nav-home-btn" class="nav-btn" onclick="returnHome()">
+            <span>🏠</span> Home
+          </button>
+          <button id="nav-export-btn" class="nav-btn" onclick="exportData()">
+            <span>📤</span> Export
+          </button>
+          <button id="nav-import-btn" class="nav-btn" onclick="importData()">
+            <span>📥</span> Import
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ================== Main App Page ================== -->
+    <div class="container">
+      <!-- Main App Header -->
+      <div class="main-header">
+        <header id="main-app-title">Buffalo & Cattle Breed Recognition</header>
+      </div>
+
+      <!-- =================== Buffalo Section =================== -->
+      <h2 id="buffalo-section-title">Buffalo Section</h2>
+      <input type="file" id="imageUpload" accept="image/*" />
+      <button id="buffalo-reupload-btn" class="btn" onclick="reUploadBuffalo()">
+        Re-upload
+      </button>
+      <div id="imageContainer"></div>
+
+      <div class="cards">
+        <div class="card measurements">
+          <h3 id="measurements-title">Measurements</h3>
+          <table>
+            <tr>
+              <th id="body-length-label">Body Length</th>
+              <td>
+                <input type="text" class="value-box" id="bodyLength" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="height-label">Height</th>
+              <td>
+                <input type="text" class="value-box" id="height" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="chest-width-label">Chest Width</th>
+              <td>
+                <input type="text" class="value-box" id="chestWidth" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="rump-angle-label">Rump Angle</th>
+              <td>
+                <input type="text" class="value-box" id="rumpAngle" readonly />
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card breed-info">
+          <h3 id="breed-info-title">Breed Information</h3>
+          <table>
+            <tr>
+              <th id="breed-name-label">Breed Name</th>
+              <td>
+                <input type="text" class="value-box" id="breedName" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="origin-state-label">Origin State</th>
+              <td>
+                <input type="text" class="value-box" id="origin" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="key-features-label">Key Features</th>
+              <td>
+                <input type="text" class="value-box" id="features" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="productivity-label">Productivity</th>
+              <td>
+                <input
+                  type="text"
+                  class="value-box"
+                  id="productivity"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <th id="fat-percent-label">Fat%</th>
+              <td><input type="text" class="value-box" id="fat" readonly /></td>
+            </tr>
+            <tr>
+              <th id="confidence-label">Confidence</th>
+              <td>
+                <input type="text" class="value-box" id="confidence" readonly />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="history-header">
+        <h3 id="buffalo-history-title">Upload History (Buffalo)</h3>
+        <button
+          id="buffalo-clear-btn"
+          class="btn btn-danger"
+          onclick="clearHistoryBuffalo()"
+        >
+          Clear All History
+        </button>
+      </div>
+      <div class="history-box">
+        <table>
+          <thead id="buffalo-history-headers">
+            <tr>
+              <th>#</th>
+              <th>Image</th>
+              <th>Body Length</th>
+              <th>Height</th>
+              <th>Chest Width</th>
+              <th>Rump Angle</th>
+              <th>Breed</th>
+              <th>Origin</th>
+              <th>Features</th>
+              <th>Productivity</th>
+              <th>Fat%</th>
+              <th>Confidence</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="historyTable"></tbody>
+        </table>
+      </div>
+
+      <!-- =================== Cattle Section =================== -->
+      <h2 id="cattle-section-title" style="margin-top: 40px">Cattle Section</h2>
+      <input type="file" id="cattleUpload" accept="image/*" />
+      <button id="cattle-reupload-btn" class="btn" onclick="reUploadCattle()">
+        Re-upload
+      </button>
+      <div id="cattleImageContainer"></div>
+
+      <div class="cards">
+        <div class="card measurements">
+          <h3 id="cattle-measurements-title">Cattle Measurements</h3>
+          <table>
+            <tr>
+              <th id="c-body-length-label">Body Length</th>
+              <td>
+                <input
+                  type="text"
+                  class="value-box"
+                  id="c_bodyLength"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <th id="c-height-label">Height</th>
+              <td>
+                <input type="text" class="value-box" id="c_height" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="c-chest-width-label">Chest Width</th>
+              <td>
+                <input
+                  type="text"
+                  class="value-box"
+                  id="c_chestWidth"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <th id="c-rump-angle-label">Rump Angle</th>
+              <td>
+                <input
+                  type="text"
+                  class="value-box"
+                  id="c_rumpAngle"
+                  readonly
+                />
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card breed-info">
+          <h3 id="cattle-breed-info-title">Cattle Breed Info</h3>
+          <table>
+            <tr>
+              <th id="c-breed-name-label">Breed Name</th>
+              <td>
+                <input
+                  type="text"
+                  class="value-box"
+                  id="c_breedName"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <th id="c-origin-state-label">Origin State</th>
+              <td>
+                <input type="text" class="value-box" id="c_origin" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="c-key-features-label">Key Features</th>
+              <td>
+                <input type="text" class="value-box" id="c_features" readonly />
+              </td>
+            </tr>
+            <tr>
+              <th id="c-productivity-label">Productivity</th>
+              <td>
+                <input
+                  type="text"
+                  class="value-box"
+                  id="c_productivity"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <th id="c-confidence-label">Confidence</th>
+              <td>
+                <input
+                  type="text"
+                  class="value-box"
+                  id="c_confidence"
+                  readonly
+                />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="history-header">
+        <h3 id="cattle-history-title">Upload History (Cattle)</h3>
+        <button
+          id="cattle-clear-btn"
+          class="btn btn-danger"
+          onclick="clearHistoryCattle()"
+        >
+          Clear All History
+        </button>
+      </div>
+      <div class="history-box">
+        <table>
+          <thead id="cattle-history-headers">
+            <tr>
+              <th>#</th>
+              <th>Image</th>
+              <th>Body Length</th>
+              <th>Height</th>
+              <th>Chest Width</th>
+              <th>Rump Angle</th>
+              <th>Breed</th>
+              <th>Origin</th>
+              <th>Features</th>
+              <th>Productivity</th>
+              <th>Fat%</th>
+              <th>Confidence</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="cattleHistoryTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================== Return to Top Button ================== -->
+    <button
+      id="returnToTop"
+      class="return-to-top"
+      onclick="scrollToTop()"
+    >
+      ↑
+    </button>
+
+    <script src="app-script.js"></script>
+  </body>
+</html>
